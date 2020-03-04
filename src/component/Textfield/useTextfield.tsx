@@ -3,12 +3,14 @@ import { useState, ChangeEvent } from 'react';
 const useTextfield = (initialState: string = '') => {
   const [input, setInput] = useState(initialState);
   const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
-    setInput(event.target.value);
+    const { value } = event.target;
+    setInput(value);
+  };
+  const resetInput = (): void => {
+    setInput('');
   };
 
-  // TODO: on key down event.key === 13
-
-  return { input, handleInput };
+  return { input, handleInput, resetInput };
 };
 
 export default useTextfield;

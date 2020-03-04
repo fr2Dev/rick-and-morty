@@ -1,12 +1,19 @@
 import * as React from 'react';
 
-export interface Props {
+// type InputEvent = UserKeyDownEvent | UserMouseEvent;
+
+type InputEvent =
+  | React.KeyboardEvent<HTMLInputElement>
+  | React.MouseEvent<HTMLButtonElement, MouseEvent>;
+
+interface TextfieldProps {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown: (event: InputEvent) => boolean | void;
 }
 
-const Textfield: React.FC<Props> = ({ value, onChange }) => (
-  <input value={value} onChange={onChange} />
+const Textfield: React.FC<TextfieldProps> = ({ value, onChange, onKeyDown }) => (
+  <input value={value} onChange={onChange} onKeyDown={onKeyDown} />
 );
 
 export default Textfield;
