@@ -1,13 +1,14 @@
 import React from 'react';
 import { Textfield, useTextfield } from './component/Textfield';
 import useTodo from './component/useTodo';
+import { Todos, Todo } from './component/useTodo';
 import './App.css';
 
 type FormEvent = React.FormEvent<HTMLFormElement>;
 
 const App = () => {
   const { input, handleInput, resetInput } = useTextfield();
-  const { todos, add, remove } = useTodo();
+  const { todos, add, remove, toggleDone } = useTodo();
 
   const handleSubmit = (event: FormEvent): void => {
     event.preventDefault();
@@ -15,18 +16,35 @@ const App = () => {
     resetInput();
   };
 
+  const getList = (todos: Todos): JSX.Element | void => {
+    if (todos.length > 0) {
+      return (
+        <ul>
+          {todos.map((todo: Todo, i: number) => {
+            const { value, isDone } = todo;
+            const textDecoration: string = isDone ? 'line-through' : '';
+
+            return (
+              <li key={i}>
+                <span onClick={() => remove(i)} style={{ textDecoration }}>
+                  {value}
+                </span>
+                <input type="checkbox" checked={isDone} onChange={() => toggleDone(i)} />
+              </li>
+            );
+          })}
+        </ul>
+      );
+    }
+  };
+
+  const List = getList(todos);
+
   return (
     <div className="App">
       <header className="App-header">
         <form onSubmit={handleSubmit}>
-          <ul>
-            {todos.length > 0 &&
-              todos.map((task, i) => (
-                <li key={i.toString()} onClick={() => remove(i)}>
-                  {task.value}
-                </li>
-              ))}
-          </ul>
+          {List}
           <Textfield value={input} onChange={handleInput} />
           <button type="submit">Add</button>
         </form>

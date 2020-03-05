@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-interface Todo {
+export interface Todo {
   value: string;
   isDone: boolean;
 }
@@ -9,9 +9,10 @@ interface UseTodo {
   add: Add;
   todos: Todos;
   remove: (index: number) => void;
+  toggleDone: (index: number) => void;
 }
 
-type Todos = Todo[];
+export type Todos = Todo[];
 
 type Add = (todo: string) => void;
 
@@ -21,18 +22,20 @@ const useTodo = (): UseTodo => {
   const add = (todo: string): void => {
     if (todo.length > 0) setTodos([...todos, { value: todo, isDone: false }]);
   };
+
   const remove = (index: number): void => {
-    todos.splice(index, 1);
-    setTodos([...todos]);
-    console.log(
-      '%c☘ %c[...todos]%c:',
-      'font-weight:bold;color: #0F9D58;font-size:1.2em;',
-      'font-weight:bold;border-bottom:2px solid #0F9D58;',
-      'font-weight:bold;',
-      [...todos]
-    );
+    const newTodos: Todos = [...todos];
+    newTodos.splice(index, 1);
+    setTodos([...newTodos]);
   };
-  return { todos, add, remove };
+
+  const toggleDone = (index: number): void => {
+    const newTodos: Todos = [...todos];
+    newTodos[index].isDone = !newTodos[index].isDone;
+    setTodos([...newTodos]);
+  };
+
+  return { todos, add, remove, toggleDone };
 };
 
 export default useTodo;
