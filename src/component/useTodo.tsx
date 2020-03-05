@@ -24,6 +24,13 @@ const useTodo = (): UseTodo => {
   const remove = (index: number): void => {
     todos.splice(index, 1);
     setTodos([...todos]);
+    console.log(
+      '%c☘ %c[...todos]%c:',
+      'font-weight:bold;color: #0F9D58;font-size:1.2em;',
+      'font-weight:bold;border-bottom:2px solid #0F9D58;',
+      'font-weight:bold;',
+      [...todos]
+    );
   };
   return { todos, add, remove };
 };

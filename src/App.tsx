@@ -3,24 +3,14 @@ import { Textfield, useTextfield } from './component/Textfield';
 import useTodo from './component/useTodo';
 import './App.css';
 
-type InputEvent =
-  | React.KeyboardEvent<HTMLInputElement>
-  | React.MouseEvent<HTMLButtonElement, MouseEvent>;
-
-const getTypeGuardKeyboardEvent = (
-  event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>
-): event is React.KeyboardEvent<HTMLInputElement> => {
-  return 'key' in event;
-};
+type FormEvent = React.FormEvent<HTMLFormElement>;
 
 const App = () => {
   const { input, handleInput, resetInput } = useTextfield();
   const { todos, add, remove } = useTodo();
-  const addTodo = (event: InputEvent): boolean | void | undefined => {
-    const isKeyboardEvent = getTypeGuardKeyboardEvent(event);
-    if (isKeyboardEvent && (event as React.KeyboardEvent<HTMLInputElement>).key !== 'Enter')
-      return false;
 
+  const handleSubmit = (event: FormEvent): void => {
+    event.preventDefault();
     add(input);
     resetInput();
   };
@@ -28,7 +18,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <div>
+        <form onSubmit={handleSubmit}>
           <ul>
             {todos.length > 0 &&
               todos.map((task, i) => (
@@ -37,9 +27,9 @@ const App = () => {
                 </li>
               ))}
           </ul>
-        </div>
-        <Textfield value={input} onChange={handleInput} onKeyDown={addTodo} />
-        <button onClick={addTodo}>Add</button>
+          <Textfield value={input} onChange={handleInput} />
+          <button type="submit">Add</button>
+        </form>
       </header>
     </div>
   );
