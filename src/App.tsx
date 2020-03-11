@@ -2,6 +2,9 @@ import React from 'react';
 import { Textfield, useTextfield } from './component/Textfield';
 import useTodo from './component/useTodo';
 import { Todos, Todo } from './component/useTodo';
+import Counter from './component/Counter';
+import Characters from './component/Characters';
+import Dogs from './component/Dogs';
 import './App.css';
 
 type FormEvent = React.FormEvent<HTMLFormElement>;
@@ -42,6 +45,9 @@ const App = () => {
 
   return (
     <div className="App">
+      <Dogs />
+      <Counter />
+      <Characters />
       <header className="App-header">
         <form onSubmit={handleSubmit}>
           {List}
