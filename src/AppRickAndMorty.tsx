@@ -1,39 +1,17 @@
 import React, { FC, useEffect } from 'react';
 import useLogic from './rickAndMorty/useLogic';
-import { Episode } from './rickAndMorty/interfaces';
-import { Episodes } from './rickAndMorty/types';
+import List from './rickAndMorty/component/List';
 
 export interface AppRickAndMortyProps {}
 
 const AppRickAndMorty: FC<AppRickAndMortyProps> = () => {
-  const { state, setData } = useLogic();
+  const { state, initData } = useLogic();
 
   useEffect(() => {
-    setData();
+    initData();
   }, []);
 
-  return (
-    <div>
-      {state.length === 0 ? (
-        'Empty'
-      ) : (
-        <ul>
-          {(state as Array<Episode>).map((episode: Episode) => {
-            const { name, id, image } = episode;
-
-            return (
-              <li key={id}>
-                <div>
-                  <img src={image.medium} alt={name} />
-                  <p>{name}</p>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      )}
-    </div>
-  );
+  return <div>{state.length === 0 ? 'Empty' : <List episodes={state} />}</div>;
 };
 
 export default AppRickAndMorty;

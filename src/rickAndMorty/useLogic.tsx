@@ -32,20 +32,12 @@ const reducer = (state: Episodes, action: Action) => {
 const useLogic = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const setData = async () => {
+  const initData = async () => {
     const data = await fetchData();
-
-    console.log(
-      '%c☘ %cdata%c:',
-      'font-weight:bold;color: #0F9D58;font-size:1.2em;',
-      'font-weight:bold;border-bottom:2px solid #0F9D58;',
-      'font-weight:bold;',
-      data
-    );
     dispatch({ type: 'FETCH_DATA', payload: data });
   };
 
-  return { state, setData };
+  return { state, initData };
 };
 
 export default useLogic;
