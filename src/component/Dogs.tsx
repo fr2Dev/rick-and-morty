@@ -65,8 +65,11 @@ const Dogs = () => {
         data
       );
       dispatch({ type: 'setData', payload: data });
+      // dispatch({ type: 'success', payload: data });
       return data;
-    } catch (error) {}
+    } catch (error) {
+      // dispatch({ type: 'error' });
+    }
   };
 
   return (
