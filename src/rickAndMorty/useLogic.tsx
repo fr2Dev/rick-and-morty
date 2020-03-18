@@ -1,5 +1,5 @@
-import React, { useReducer } from 'react';
-import { Episode, Data, Action } from './interfaces';
+import { useReducer } from 'react';
+import { Data, Action } from './interfaces';
 import { Episodes } from './types';
 
 const url = 'http://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes';
