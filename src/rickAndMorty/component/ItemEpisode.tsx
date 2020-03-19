@@ -7,12 +7,18 @@ export interface ItemEpisodeProps {
 }
 
 const ItemEpisode: FC<ItemEpisodeProps> = ({ episode }) => {
-  const { name, image } = episode;
+  const { name, image, season, number } = episode;
+  const epNumber = number < 10 ? `0${number}` : number;
 
   return (
-    <ItemStyled>
-      <img src={image.medium} alt={name} />
-      <p>{name}</p>
+    <ItemStyled imgSrc={image.medium} season={season}>
+      <div>
+        <p>{name}</p>
+        <div>
+          <div>{`S${season}`}</div>
+          <div>{epNumber}</div>
+        </div>
+      </div>
     </ItemStyled>
   );
 };

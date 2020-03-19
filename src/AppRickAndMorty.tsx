@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import useLogic from './rickAndMorty/useLogic';
 import { List, Loader } from './rickAndMorty/component';
-import { ContainerCenter } from './rickAndMorty/styled';
+import { ContainerCenter, AppContainer } from './rickAndMorty/styled';
 
 export interface AppRickAndMortyProps {}
 
@@ -14,7 +14,7 @@ const AppRickAndMorty: FC<AppRickAndMortyProps> = () => {
   }, []);
 
   return (
-    <div>
+    <AppContainer>
       {isLoading ? (
         <ContainerCenter>
           <Loader style={{ width: '100px' }} />
@@ -24,7 +24,7 @@ const AppRickAndMorty: FC<AppRickAndMortyProps> = () => {
       ) : (
         <List episodes={episodes} />
       )}
-    </div>
+    </AppContainer>
   );
 };
 
