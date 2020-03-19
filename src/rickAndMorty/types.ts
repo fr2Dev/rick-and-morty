@@ -26,3 +26,16 @@ export type InfosEpisode = Omit<
   Episode,
   'url' | 'airdate' | 'airtime' | 'airstamp' | 'runtime' | '_links'
 >;
+
+export type Action =
+  | {
+      type: 'FETCHING';
+    }
+  | {
+      type: 'SUCCESS';
+      payload: Episodes;
+    }
+  | {
+      type: 'ERROR';
+      error: Error;
+    };

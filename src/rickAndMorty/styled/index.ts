@@ -10,3 +10,10 @@ export const ListStyled = styled.ul`
 export const ItemStyled = styled.li`
   text-decoration: none;
 `;
+
+export const ContainerCenter = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+`;

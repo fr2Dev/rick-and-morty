@@ -1,27 +1,24 @@
 import { useReducer } from 'react';
-import { Data, Action } from './interfaces';
-import { Episodes } from './types';
+import { Data, EpisodesState } from './interfaces';
+import { Episodes, Action } from './types';
 
 const url = 'http://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes';
-const initialState: Episodes = [];
-
-const fetchData = async () => {
-  try {
-    const response = await fetch(url);
-    const data: Data = await response.json();
-    const episodes = data._embedded.episodes;
-
-    return episodes;
-  } catch (error) {
-    console.log({ error });
-    return [];
-  }
+const initialState: EpisodesState = {
+  isLoading: false,
+  episodes: [],
+  error: ''
 };
 
-const reducer = (state: Episodes, action: Action) => {
+const reducer = (state: EpisodesState, action: Action) => {
   switch (action.type) {
-    case 'FETCH_DATA': {
-      if (action.payload) return action.payload;
+    case 'FETCHING': {
+      return { ...state, isLoading: true, error: '' };
+    }
+    case 'SUCCESS': {
+      return { ...state, isLoading: false, episodes: action.payload };
+    }
+    case 'ERROR': {
+      return { ...state, isLoading: false, error: action.error.message };
     }
     default: {
       return state;
@@ -32,12 +29,23 @@ const reducer = (state: Episodes, action: Action) => {
 const useLogic = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const initData = async () => {
-    const data = await fetchData();
-    dispatch({ type: 'FETCH_DATA', payload: data });
+  const fetchData = async () => {
+    dispatch({ type: 'FETCHING' });
+    try {
+      const response = await fetch(url);
+      const data: Data = await response.json();
+      const episodes = data._embedded.episodes;
+      dispatch({ type: 'SUCCESS', payload: episodes });
+
+      // return episodes;
+    } catch (error) {
+      console.log({ error });
+      dispatch({ type: 'ERROR', error });
+      // return [];
+    }
   };
 
-  return { state, initData };
+  return { state, fetchData };
 };
 
 export default useLogic;

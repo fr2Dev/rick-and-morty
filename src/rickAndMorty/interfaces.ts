@@ -6,7 +6,8 @@ export interface Data {
   };
 }
 
-export interface Action {
-  type: string;
-  payload?: Episodes;
+export interface EpisodesState {
+  isLoading: boolean;
+  episodes: Episodes;
+  error: string;
 }
