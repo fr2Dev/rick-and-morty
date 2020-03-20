@@ -11,4 +11,5 @@ export interface EpisodesState {
   episodes: Episodes;
   favorites: Episodes;
   error: string;
+  seasonFilter: number;
 }

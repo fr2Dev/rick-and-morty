@@ -46,4 +46,8 @@ export type Action =
   | {
       type: 'REMOVE_FAVORITE';
       payload: Episodes;
+    }
+  | {
+      type: 'SET_FILTER';
+      payload: number;
     };

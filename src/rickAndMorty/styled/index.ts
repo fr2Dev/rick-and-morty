@@ -1,4 +1,4 @@
-import styled, { StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 // import { up } from 'styled-breakpoints';
 
 const itemSize = '250px';

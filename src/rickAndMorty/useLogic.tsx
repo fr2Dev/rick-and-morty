@@ -7,7 +7,8 @@ const initialState: EpisodesState = {
   isLoading: false,
   episodes: [],
   favorites: [],
-  error: ''
+  error: '',
+  seasonFilter: 0
 };
 
 const reducer = (state: EpisodesState, action: Action) => {
@@ -26,6 +27,9 @@ const reducer = (state: EpisodesState, action: Action) => {
     }
     case 'REMOVE_FAVORITE': {
       return { ...state, favorites: action.payload };
+    }
+    case 'SET_FILTER': {
+      return { ...state, seasonFilter: action.payload };
     }
     default: {
       return state;
@@ -65,7 +69,11 @@ const useLogic = () => {
     dispatch(dispatchObj);
   };
 
-  return { state, fetchData, toggleFavorite };
+  const setFilter = (seasonNum: number) => {
+    dispatch({ type: 'SET_FILTER', payload: seasonNum });
+  };
+
+  return { state, fetchData, toggleFavorite, setFilter };
 };
 
 export default useLogic;
