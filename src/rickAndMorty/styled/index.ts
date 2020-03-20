@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-// import { up } from 'styled-breakpoints';
+import { up } from 'styled-breakpoints';
 
 const itemSize = '250px';
 const borderRadius = '8px';
@@ -17,6 +17,11 @@ export const ListStyled = styled.ul`
   grid-gap: 1rem;
   list-style: none;
   padding: 0;
+
+  ${up('tablet')} {
+    grid-template-columns: repeat(auto-fit, minmax(${itemSize}, 400px));
+    place-content: center;
+  }
 `;
 
 const seasonColors = ['#97ce4c', '#49beb7', '#ff5959', '#a56cc1'];
