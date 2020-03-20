@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 import { Episodes, Episode } from '../../rickAndMorty/types';
 import { ListStyled } from '../styled';
 import ItemEpisode from './ItemEpisode';
@@ -32,21 +32,28 @@ const getSearchEpisodes = (episodes: Episodes, searchValue: string) => {
 const List: FC<ListProps> = ({ episodes, favorites, toggleFavorite, seasonFilter, search }) => {
   const filteredEpisodes = getFilteredEpisodes(episodes, seasonFilter);
   const searchedEpisodes = getSearchEpisodes(filteredEpisodes, search);
+  const noResultFound = searchedEpisodes.length === 0;
 
   return (
-    <ListStyled>
-      {(searchedEpisodes as Array<Episode>).map((episode: Episode) => {
-        const isFavorite = favorites.some(ep => ep.id === episode.id);
-        return (
-          <ItemEpisode
-            episode={episode}
-            key={episode.id}
-            isFavorite={isFavorite}
-            toggleFavorite={() => toggleFavorite(episode)}
-          />
-        );
-      })}
-    </ListStyled>
+    <Fragment>
+      {noResultFound ? (
+        <div style={{ color: '#fff' }}>No result found</div>
+      ) : (
+        <ListStyled>
+          {(searchedEpisodes as Array<Episode>).map((episode: Episode) => {
+            const isFavorite = favorites.some(ep => ep.id === episode.id);
+            return (
+              <ItemEpisode
+                episode={episode}
+                key={episode.id}
+                isFavorite={isFavorite}
+                toggleFavorite={() => toggleFavorite(episode)}
+              />
+            );
+          })}
+        </ListStyled>
+      )}
+    </Fragment>
   );
 };
 

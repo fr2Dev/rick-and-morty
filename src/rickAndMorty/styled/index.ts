@@ -7,6 +7,7 @@ const borderRadius = '8px';
 export const AppContainer = styled.div`
   background-color: #3a373b;
   font-family: Verdana, Helvetica, sans-serif;
+  min-height: 100vh;
   padding: 1rem;
 `;
 
