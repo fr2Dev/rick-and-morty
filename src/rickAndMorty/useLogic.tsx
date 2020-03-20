@@ -8,7 +8,8 @@ const initialState: EpisodesState = {
   episodes: [],
   favorites: [],
   error: '',
-  seasonFilter: 0
+  seasonFilter: 0,
+  search: ''
 };
 
 const reducer = (state: EpisodesState, action: Action) => {
@@ -30,6 +31,9 @@ const reducer = (state: EpisodesState, action: Action) => {
     }
     case 'SET_FILTER': {
       return { ...state, seasonFilter: action.payload };
+    }
+    case 'SEARCH': {
+      return { ...state, search: action.payload };
     }
     default: {
       return state;
@@ -73,7 +77,11 @@ const useLogic = () => {
     dispatch({ type: 'SET_FILTER', payload: seasonNum });
   };
 
-  return { state, fetchData, toggleFavorite, setFilter };
+  const setSearchValue = (value: string) => {
+    dispatch({ type: 'SEARCH', payload: value });
+  };
+
+  return { state, fetchData, toggleFavorite, setFilter, setSearchValue };
 };
 
 export default useLogic;

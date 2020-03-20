@@ -50,4 +50,8 @@ export type Action =
   | {
       type: 'SET_FILTER';
       payload: number;
+    }
+  | {
+      type: 'SEARCH';
+      payload: string;
     };
