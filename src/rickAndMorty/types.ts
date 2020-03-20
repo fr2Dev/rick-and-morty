@@ -1,3 +1,5 @@
+import { EpisodesState } from './interfaces';
+
 export type Episodes = Episode[] | [];
 
 export type Episode = {
@@ -29,6 +31,10 @@ export type Episode = {
 
 export type Action =
   | {
+      type: 'SET_FAVORITE_LOCAL';
+      payload: Episodes;
+    }
+  | {
       type: 'FETCHING';
     }
   | {
@@ -40,11 +46,7 @@ export type Action =
       error: Error;
     }
   | {
-      type: 'ADD_FAVORITE';
-      payload: Episode;
-    }
-  | {
-      type: 'REMOVE_FAVORITE';
+      type: 'TOGGLE_FAVORITE';
       payload: Episodes;
     }
   | {
