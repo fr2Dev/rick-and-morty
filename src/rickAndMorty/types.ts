@@ -22,10 +22,10 @@ export type Episode = {
   };
 };
 
-export type InfosEpisode = Omit<
-  Episode,
-  'url' | 'airdate' | 'airtime' | 'airstamp' | 'runtime' | '_links'
->;
+// export type InfosEpisode = Omit<
+//   Episode,
+//   'url' | 'airdate' | 'airtime' | 'airstamp' | 'runtime' | '_links'
+// >;
 
 export type Action =
   | {
@@ -38,4 +38,12 @@ export type Action =
   | {
       type: 'ERROR';
       error: Error;
+    }
+  | {
+      type: 'ADD_FAVORITE';
+      payload: Episode;
+    }
+  | {
+      type: 'REMOVE_FAVORITE';
+      payload: Episodes;
     };

@@ -68,6 +68,15 @@ export const ItemStyled = styled.li`
       }
     }
   }
+
+  svg {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    width: 26px;
+    height: auto;
+    cursor: pointer;
+  }
 `;
 
 export const ContainerCenter = styled.div`

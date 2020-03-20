@@ -6,8 +6,8 @@ import { ContainerCenter, AppContainer } from './rickAndMorty/styled';
 export interface AppRickAndMortyProps {}
 
 const AppRickAndMorty: FC<AppRickAndMortyProps> = () => {
-  const { state, fetchData } = useLogic();
-  const { episodes, isLoading, error } = state;
+  const { state, fetchData, toggleFavorite } = useLogic();
+  const { episodes, favorites, isLoading, error } = state;
 
   useEffect(() => {
     fetchData();
@@ -22,7 +22,7 @@ const AppRickAndMorty: FC<AppRickAndMortyProps> = () => {
       ) : error.length > 0 ? (
         <p>{error}</p>
       ) : (
-        <List episodes={episodes} />
+        <List episodes={episodes} favorites={favorites} toggleFavorite={toggleFavorite} />
       )}
     </AppContainer>
   );

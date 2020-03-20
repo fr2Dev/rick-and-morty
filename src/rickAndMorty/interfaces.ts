@@ -9,5 +9,6 @@ export interface Data {
 export interface EpisodesState {
   isLoading: boolean;
   episodes: Episodes;
+  favorites: Episodes;
   error: string;
 }
