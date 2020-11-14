@@ -2,7 +2,8 @@ import { useReducer } from 'react';
 import { Data, EpisodesState } from './interfaces';
 import { Episode, Episodes, Action } from './types';
 
-const url = 'http://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes';
+const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+const url = `${corsProxy}http://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes`;
 
 const reducer = (state: EpisodesState, action: Action) => {
   switch (action.type) {
